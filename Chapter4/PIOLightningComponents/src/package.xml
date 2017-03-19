@@ -4,12 +4,16 @@
     <description>This package consists of Lightning Components and apex code to integrate with PredictionIO engine and PredictionIO Event Server</description>
     <types>
         <members>HttpUtil</members>
+        <members>MockPredictionIOEngineResponse</members>
+        <members>MockPredictionIOEventServerResponse</members>
         <members>PredictionIOResult</members>
         <members>ProductSelector</members>
         <members>ProductViewCaptureController</members>
         <members>ProductViewCaptureModel</members>
         <members>SimilarProductRecommenderController</members>
         <members>SimilarProductRecommenderModel</members>
+        <members>TestProductViewCaptureController</members>
+        <members>TestSimilarProductRecommenderController</members>
         <members>UserSelector</members>
         <name>ApexClass</name>
     </types>
@@ -28,6 +32,11 @@
     <types>
         <members>PredictionIOSettings__c</members>
         <name>CustomObject</name>
+    </types>
+    <types>
+        <members>PIOEngine</members>
+        <members>PIOEventServer</members>
+        <name>RemoteSiteSetting</name>
     </types>
     <version>37.0</version>
 </Package>
