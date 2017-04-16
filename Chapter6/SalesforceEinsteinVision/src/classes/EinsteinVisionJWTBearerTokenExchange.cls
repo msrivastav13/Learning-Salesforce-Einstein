@@ -21,8 +21,14 @@ public class EinsteinVisionJWTBearerTokenExchange {
                     break;
                 }
             }
+        }else{
+            system.debug('EXCEPTION CODE..'+res.getStatusCode());
+            system.debug('RESPONSE_BODY..'+res.getBody());
+            throw new EinsteinVisionAPIException(res.getBody());
         }
         return access_token; 
     }
+
+    private class EinsteinVisionAPIException extends Exception {}
 
 }

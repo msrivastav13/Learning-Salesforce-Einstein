@@ -1,4 +1,4 @@
-public class EinsteinVisionJWT {
+ public class EinsteinVisionJWT {
 
     public static String tokenEndpoint = 'https://api.metamind.io/v1/oauth2/token';
 
@@ -27,8 +27,11 @@ public class EinsteinVisionJWT {
           this.exp = rightNow + validFor;
        }
     }
-    
-   
+
+    /** This method issues JWT encoded body needed By Einstein Vision To Exchange For AccessToken
+    * @param   AccountId , Expiration Time, Privatekey
+    * @return JWT String
+    **/
     public static String issue(String accountId , Integer expirationTime,String privateKeyString) {
         String jwt = '';
         //Create Header Encoded String
@@ -38,6 +41,7 @@ public class EinsteinVisionJWT {
         EinsteinVisionJWT.JWTBodyParameters body = new EinsteinVisionJWT.JWTBodyParameters('developer.salesforce.com',accountId,
                                                                                      EinsteinVisionJWT.tokenEndpoint
                                                                                     ,expirationTime);
+       system.debug('BODY...'+System.JSON.Serialize(body));
        jwt = encodedHeader + '.' + base64URLencode(Blob.valueOf(System.JSON.Serialize(body)));
        Blob signature = null;
        Blob privateKey = EncodingUtil.base64Decode(privateKeyString);
