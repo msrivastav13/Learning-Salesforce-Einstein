@@ -38,6 +38,21 @@ public with sharing class EinsteinVisionAccessTokenManager{
      return currentoken;
    }
 
+   /** This method updates the access token .Use this method only after all callouts in system is executed else you will recieve pending DML exception
+    * @param  String access token
+    * @return void
+    **/
+
+   public static void updateAccessToken(String newAccessToken){
+      EinsteinVision__c accessTokenRec = EinsteinVision__c.getOrgDefaults();
+      accessTokenRec.AccessToken__c = newAccessToken;
+      try{
+         update accessTokenRec;
+      }catch(exception e){
+        throw new AccessTokenManagerException('Update of the access token failed.Contact admin with the message '+e.getMessage());
+      }
+   }
+
    /** This method gets the String data from the ContentVersion Object
     * @param  File Name where Private key is stored .
     * @return String data (base64 encoded string format) stored in the content version file
