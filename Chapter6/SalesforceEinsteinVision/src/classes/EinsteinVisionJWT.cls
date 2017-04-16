@@ -1,4 +1,4 @@
- public class EinsteinVisionJWT {
+public class EinsteinVisionJWT {
 
     public static String tokenEndpoint = 'https://api.metamind.io/v1/oauth2/token';
 

@@ -3,6 +3,7 @@
     <fullName>Einstein Vision</fullName>
     <description>This package consists of code for connecting Salesforce with the Einstein Vision</description>
     <types>
+        <members>EinsteinVisionAccessTokenManager</members>
         <members>EinsteinVisionJWT</members>
         <members>EinsteinVisionJWTBearerTokenExchange</members>
         <name>ApexClass</name>
