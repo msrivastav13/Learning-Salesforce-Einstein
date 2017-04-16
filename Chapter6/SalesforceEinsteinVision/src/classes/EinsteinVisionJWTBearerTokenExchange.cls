@@ -1,12 +1,12 @@
 public class EinsteinVisionJWTBearerTokenExchange {
 
-    public static String getAccessToken(String tokenEndpoint, EinsteinVisionJWT jwt) {
-    
+    public static String getAccessToken(String accountId ,Integer expirationTime,String privateKeyString ) {
+        String tokenendPoint = 'https://api.metamind.io/v1/oauth2/token';
         String access_token = null;
-        String body = 'grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=' + jwt.issue();
+        String body = 'grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=' + EinsteinVisionJWT.issue(accountId,expirationTime,privateKeyString);
         HttpRequest req = new HttpRequest();                            
         req.setMethod('POST');
-        req.setEndpoint(tokenEndpoint);
+        req.setEndpoint(tokenendPoint);
         req.setHeader('Content-type', 'application/x-www-form-urlencoded');
         req.setBody(body);
         Http http = new Http();               

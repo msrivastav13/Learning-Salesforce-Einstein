@@ -27,7 +27,7 @@ public class EinsteinVisionJWT {
     }
     
    
-    public String issue(String accountId , Integer expirationTime,String privateKeyString) {
+    public static String issue(String accountId , Integer expirationTime,String privateKeyString) {
         String jwt = '';
         //Create Header Encoded String
         EinsteinVisionJWT.JWTHeaderParameters header = new EinsteinVisionJWT.JWTHeaderParameters('RS256');
@@ -44,7 +44,7 @@ public class EinsteinVisionJWT {
        return jwt;
     }
 
-    public String base64URLencode(Blob input){ 
+    private static String base64URLencode(Blob input){ 
         String output = encodingUtil.base64Encode(input);
         output = output.replace('+', '-');
         output = output.replace('/', '_');
@@ -53,6 +53,4 @@ public class EinsteinVisionJWT {
         }
         return output;
     }
-    
-
 }
