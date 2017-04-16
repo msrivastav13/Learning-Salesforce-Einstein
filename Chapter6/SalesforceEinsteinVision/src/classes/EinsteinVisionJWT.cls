@@ -1,5 +1,7 @@
 public class EinsteinVisionJWT {
 
+    public static String tokenEndpoint = 'https://api.metamind.io/v1/oauth2/token';
+
     public class JWTHeaderParameters{
         public String alg ;
         public JWTHeaderParameters(String alg){
@@ -34,7 +36,7 @@ public class EinsteinVisionJWT {
         String encodedHeader = base64URLencode(Blob.valueOf(System.JSON.Serialize(header)));
         //Create Body Encoded String
         EinsteinVisionJWT.JWTBodyParameters body = new EinsteinVisionJWT.JWTBodyParameters('developer.salesforce.com',accountId,
-                                                                                    'https://api.metamind.io/v1/oauth2/token'
+                                                                                     EinsteinVisionJWT.tokenEndpoint
                                                                                     ,expirationTime);
        jwt = encodedHeader + '.' + base64URLencode(Blob.valueOf(System.JSON.Serialize(body)));
        Blob signature = null;
