@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Einstein Vision</fullName>
+    <description>This package consists of code for connecting Salesforce with the Einstein Vision</description>
+    <types>
+        <members>EinsteinVisionJWT</members>
+        <members>EinsteinVisionJWTBearerTokenExchange</members>
+        <name>ApexClass</name>
+    </types>
+    <version>38.0</version>
+</Package>
