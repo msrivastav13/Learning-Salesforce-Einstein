@@ -4,9 +4,22 @@
     <description>This package consists of code for connecting Salesforce with the Einstein Vision</description>
     <types>
         <members>EinsteinVisionAccessTokenManager</members>
+        <members>EinsteinVisionHttpUtility</members>
         <members>EinsteinVisionJWT</members>
         <members>EinsteinVisionJWTBearerTokenExchange</members>
+        <members>EinsteinVisionUtility</members>
         <name>ApexClass</name>
+    </types>
+    <types>
+        <members>EinsteinVision__c.AccessToken__c</members>
+        <members>EinsteinVision__c.AccountId__c</members>
+        <members>EinsteinVision__c.ExpirationTime__c</members>
+        <members>EinsteinVision__c.PrivateKeyName__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>EinsteinVision__c</members>
+        <name>CustomObject</name>
     </types>
     <version>38.0</version>
 </Package>
