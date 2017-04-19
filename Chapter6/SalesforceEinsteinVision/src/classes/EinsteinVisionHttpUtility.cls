@@ -1,5 +1,9 @@
 public class EinsteinVisionHttpUtility{
-
+    
+    /** This method makes HTTP POST,PUT Call from salesforce to Einstein Vision APIs
+    * @param   blob , content type, endpoint ,Resquest type(POST/PUT),access Token
+    * @return JWT String
+    **/
     public static HttpResponse makeCallout(blob body,String contentType,String endPoint,String requestType,String accessToken){
         // Instantiate a new http object
         Http h = new Http();

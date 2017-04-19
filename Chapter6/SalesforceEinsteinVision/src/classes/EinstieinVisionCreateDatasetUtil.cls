@@ -2,6 +2,11 @@ public with sharing class EinstieinVisionCreateDatasetUtil{
 
     public static final String endpoint = 'https://api.metamind.io/v1/vision/datasets/upload';
 
+     /** This method creates DatasetFromURL.The public URL can be a image zip file stored in cloudinary/box/google
+    * @param   Public URL
+    * @return  EinsteinVisionDatasetResult that comprises of datasetId and status as upload
+    **/
+
     public static EinsteinVisionDatasetResult createDatasetFromURLAsync(String publicURL){
         EinsteinVisionDatasetResult dataset = new EinsteinVisionDatasetResult();
         String body = '';
@@ -13,9 +18,7 @@ public with sharing class EinstieinVisionCreateDatasetUtil{
         EinsteinVisionAccessTokenManager.AccessToken accessTokenObject = EinsteinVisionAccessTokenManager.getcurrentAccessToken();
         HttpResponse result = EinsteinVisionHttpUtility.makeCallout(bodyBlob,EinsteinVisionUtility.getContentType(),endpoint,'POST',accessTokenObject.accessToken);
         if(result.getStatusCode() == 200){
-           String responseString = result.getBody();
-           responseString = responseString.replaceAll('object','object_x');
-           dataset = EinsteinVisionDatasetResult.parse(responseString);
+           dataset = parseResponse(result.getBody());
            //Check if token needs commit and if yes commit it 
            if(accessTokenObject.isChanged){
                EinsteinVisionAccessTokenManager.updateAccessToken(accessTokenObject.accessToken);
@@ -27,15 +30,20 @@ public with sharing class EinstieinVisionCreateDatasetUtil{
                                                                                 endpoint,'POST',
                                                                                 EinsteinVisionAccessTokenManager.getNewToken(EinsteinVision__c.getOrgDefaults()).accessToken
                                                                                 );
-               String responseString = result.getBody();
-               responseString = responseString.replaceAll('object','object_x');
-               dataset = EinsteinVisionDatasetResult.parse(responseString);
+              dataset = parseResponse(retryresult.getBody());
                //Commit the new token
                EinsteinVisionAccessTokenManager.updateAccessToken(accessTokenObject.accessToken);
             }else{
               throw new EinstieinVisionException(result.getBody());
            }
         }
+        return dataset;
+    }
+
+    private static EinsteinVisionDatasetResult parseResponse(String responseBody){
+        String responseString = responseBody;
+        responseString = responseString.replaceAll('object','object_x');
+        EinsteinVisionDatasetResult dataset = EinsteinVisionDatasetResult.parse(responseString);
         return dataset;
     }
 
