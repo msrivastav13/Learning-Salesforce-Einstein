@@ -177,4 +177,8 @@ public class EinsteinVisionUtility{
         None
     }
 
+    public static string getContentType() {
+        return 'multipart/form-data; charset="UTF-8"; boundary="' + Boundary + '"';
+    }
+
 }
