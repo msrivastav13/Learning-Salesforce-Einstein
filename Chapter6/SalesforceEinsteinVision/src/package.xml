@@ -10,6 +10,8 @@
         <members>EinsteinVisionHttpUtility</members>
         <members>EinsteinVisionJWT</members>
         <members>EinsteinVisionJWTBearerTokenExchange</members>
+        <members>EinsteinVisionTrainDataSetResponse</members>
+        <members>EinsteinVisionTrainDataset</members>
         <members>EinsteinVisionUtility</members>
         <members>EinstieinVisionCreateDatasetUtil</members>
         <name>ApexClass</name>

@@ -12,6 +12,7 @@ public class EinsteinVisionHttpUtility{
         req.setHeader('Authorization', 'Bearer '+accessToken);
         req.setHeader('Content-Type', contentType);
         req.setHeader('Accept', 'application/json');
+        req.setHeader('Cache-Control', 'no-cache');
         req.setEndpoint(endPoint);
         req.setBodyAsBlob(body);
         req.setMethod(requestType);
@@ -31,6 +32,7 @@ public class EinsteinVisionHttpUtility{
         // Instantiate a new HTTP request, specify the method (GET) as well as the endpoint
         HttpRequest req = new HttpRequest();
         req.setHeader('Authorization', 'Bearer '+accessToken);
+        req.setHeader('Cache-Control', 'no-cache');
         req.setHeader('Accept', 'application/json');
         req.setEndpoint(endPoint);
         req.setMethod('GET');

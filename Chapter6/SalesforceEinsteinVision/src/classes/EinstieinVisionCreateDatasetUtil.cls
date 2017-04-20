@@ -32,7 +32,7 @@ public with sharing class EinstieinVisionCreateDatasetUtil{
                                                                                 );
               dataset = parseResponse(retryresult.getBody());
                //Commit the new token
-               EinsteinVisionAccessTokenManager.updateAccessToken(accessTokenObject.accessToken);
+               EinsteinVisionAccessTokenManager.updateAccessToken(EinsteinVisionAccessTokenManager.getNewToken(EinsteinVision__c.getOrgDefaults()).accessToken);
             }else{
               throw new EinstieinVisionException(result.getBody());
            }
