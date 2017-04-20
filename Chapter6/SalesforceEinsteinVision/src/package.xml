@@ -4,7 +4,9 @@
     <description>This package consists of code for connecting Salesforce with the Einstein Vision</description>
     <types>
         <members>EinsteinVisionAccessTokenManager</members>
+        <members>EinsteinVisionDataSetList</members>
         <members>EinsteinVisionDatasetResult</members>
+        <members>EinsteinVisionGetDataset</members>
         <members>EinsteinVisionHttpUtility</members>
         <members>EinsteinVisionJWT</members>
         <members>EinsteinVisionJWTBearerTokenExchange</members>

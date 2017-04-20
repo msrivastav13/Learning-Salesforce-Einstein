@@ -40,13 +40,13 @@ public with sharing class EinstieinVisionCreateDatasetUtil{
         return dataset;
     }
 
-    private static EinsteinVisionDatasetResult parseResponse(String responseBody){
+    public static EinsteinVisionDatasetResult parseResponse(String responseBody){
         String responseString = responseBody;
         responseString = responseString.replaceAll('object','object_x');
         EinsteinVisionDatasetResult dataset = EinsteinVisionDatasetResult.parse(responseString);
         return dataset;
     }
 
-    private class EinstieinVisionException extends Exception {}
+    public class EinstieinVisionException extends Exception {}
 
 }
