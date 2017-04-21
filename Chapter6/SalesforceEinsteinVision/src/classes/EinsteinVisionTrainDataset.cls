@@ -13,8 +13,8 @@ public with sharing class EinsteinVisionTrainDataset{
         body += EinsteinVisionUtility.WriteBodyParameter('name', modelname);
         body += EinsteinVisionUtility.WriteBoundary();
         body += EinsteinVisionUtility.WriteBodyParameter('datasetId',datasetId);
-        body += EinsteinVisionUtility.WriteBoundary();
-        body += EinsteinVisionUtility.WriteBodyParameter('learningRate', '0.0001');
+       // body += EinsteinVisionUtility.WriteBoundary();
+       // body += EinsteinVisionUtility.WriteBodyParameter('learningRate', '0.0001');
         body += EinsteinVisionUtility.WriteBoundary(EinsteinVisionUtility.EndingType.CrLf);
         Blob bodyBlob = EncodingUtil.base64Decode(body);
         return bodyBlob;
@@ -71,8 +71,9 @@ public with sharing class EinsteinVisionTrainDataset{
          EinsteinVisionTrainDataSetResponse trainingResult = new EinsteinVisionTrainDataSetResponse();
           //Invoke AccessTokenManager To Get accessToken
         EinsteinVisionAccessTokenManager.AccessToken accessTokenObject = EinsteinVisionAccessTokenManager.getcurrentAccessToken();
-        HttpResponse result = EinsteinVisionHttpUtility.makegetCallout(endpoint+modelId,accessTokenObject.accessToken);
+        HttpResponse result = EinsteinVisionHttpUtility.makegetCallout(endpoint+'/'+modelId,accessTokenObject.accessToken);
         if(result.getStatusCode() == 200){
+        system.debug(result.getBody());
            trainingResult = parseResponse(result.getBody());
            //Check if token needs commit and if yes commit it 
            if(accessTokenObject.isChanged){
@@ -81,7 +82,7 @@ public with sharing class EinsteinVisionTrainDataset{
         }else{
            if(result.getBody()== '{"message":"Invalid access token"}'){
               //retry with new token
-               HttpResponse retryresult = EinsteinVisionHttpUtility.makegetCallout(endpoint+modelId,
+               HttpResponse retryresult = EinsteinVisionHttpUtility.makegetCallout(endpoint+'/'+modelId,
                                                                                 EinsteinVisionAccessTokenManager.getNewToken(EinsteinVision__c.getOrgDefaults()).accessToken
                                                                                 );
                 if(retryresult.getStatusCode()!=200){
