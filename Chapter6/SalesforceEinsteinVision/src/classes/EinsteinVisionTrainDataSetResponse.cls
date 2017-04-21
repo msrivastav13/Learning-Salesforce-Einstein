@@ -8,7 +8,7 @@ public class EinsteinVisionTrainDataSetResponse{
     public String createdAt;    //2016-09-16T18:03:21.000+0000
     public String updatedAt;    //2016-09-16T18:03:21.000+0000
     public Double learningRate; //0.001
-    public Integer epochs;  //3
+    public Double epochs;  //3
     public String object_x;   //training
     public String modelId;  //7JXCXTRXTMNLJCEF2DR5CJ46QU
     public cls_trainParams trainParams;
