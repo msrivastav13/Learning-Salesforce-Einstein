@@ -1,6 +1,6 @@
 public with sharing class EinstieinVisionCreateDatasetUtil{
 
-    public static final String endpoint = 'https://api.metamind.io/v1/vision/datasets/upload/sync';
+    public static final String endpoint = 'https://api.metamind.io/v1/vision/datasets/upload';
 
      /** This method creates DatasetFromURL.The public URL can be a image zip file stored in cloudinary/box/google
     * @param   Public URL
