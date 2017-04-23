@@ -25,7 +25,7 @@ public with sharing class EinsteinVisionTrainDataset{
     * @return EinsteinVisionTrainDataSetResponse
     **/
 
-     public static EinsteinVisionTrainDataSetResponse trainDataSet(String modelname,String datasetId){
+     public static EinsteinVisionTrainDataSetResponse trainDataSet(String modelname,String datasetId,Boolean commitToken){
         blob requestBody = buildBlobBody(modelname,datasetId);
         EinsteinVisionTrainDataSetResponse trainingResult = new EinsteinVisionTrainDataSetResponse();
         //Invoke AccessTokenManager To Get accessToken
@@ -35,7 +35,7 @@ public with sharing class EinsteinVisionTrainDataset{
         if(result.getStatusCode() == 200){
            trainingResult = parseResponse(result.getBody());
            //Check if token needs commit and if yes commit it 
-           if(accessTokenObject.isChanged){
+           if(accessTokenObject.isChanged && commitToken){
                EinsteinVisionAccessTokenManager.updateAccessToken(accessTokenObject.accessToken);
            }
         }else{
@@ -50,9 +50,11 @@ public with sharing class EinsteinVisionTrainDataset{
             }else{
                 trainingResult = parseResponse(retryresult.getBody());
                //Commit the new token
-                EinsteinVisionAccessTokenManager.updateAccessToken(EinsteinVisionAccessTokenManager.getNewToken(
+                if(commitToken){
+                   EinsteinVisionAccessTokenManager.updateAccessToken(EinsteinVisionAccessTokenManager.getNewToken(
                    EinsteinVision__c.getOrgDefaults())
                    .accessToken);
+                 }
                 }
             }else{
               throw new EinstieinVisionCreateDatasetUtil.EinstieinVisionException(result.getBody());
@@ -67,7 +69,7 @@ public with sharing class EinsteinVisionTrainDataset{
       * @param   name of the model,DatasetId of the model
       * @return EinsteinVisionTrainDataSetResponse
      **/
-     public static EinsteinVisionTrainDataSetResponse gettrainingStatus(String modelId){
+     public static EinsteinVisionTrainDataSetResponse gettrainingStatus(String modelId,Boolean commitToken){
          EinsteinVisionTrainDataSetResponse trainingResult = new EinsteinVisionTrainDataSetResponse();
           //Invoke AccessTokenManager To Get accessToken
         EinsteinVisionAccessTokenManager.AccessToken accessTokenObject = EinsteinVisionAccessTokenManager.getcurrentAccessToken();
@@ -76,7 +78,7 @@ public with sharing class EinsteinVisionTrainDataset{
         system.debug(result.getBody());
            trainingResult = parseResponse(result.getBody());
            //Check if token needs commit and if yes commit it 
-           if(accessTokenObject.isChanged){
+           if(accessTokenObject.isChanged && commitToken){
                EinsteinVisionAccessTokenManager.updateAccessToken(accessTokenObject.accessToken);
            }
         }else{
@@ -90,9 +92,9 @@ public with sharing class EinsteinVisionTrainDataset{
                 }else{
                     trainingResult = parseResponse(retryresult.getBody());
                     //Commit the new token
-                    EinsteinVisionAccessTokenManager.updateAccessToken(EinsteinVisionAccessTokenManager.getNewToken(
-                   EinsteinVision__c.getOrgDefaults())
-                   .accessToken);
+                    if(commitToken){
+                     EinsteinVisionAccessTokenManager.updateAccessToken(EinsteinVisionAccessTokenManager.getNewToken(EinsteinVision__c.getOrgDefaults()).accessToken);
+                    }
                 }
             }else{
               throw new EinstieinVisionCreateDatasetUtil.EinstieinVisionException(result.getBody());

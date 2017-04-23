@@ -4,7 +4,7 @@ public with sharing class EinsteinVisionGetDataset{
     * @param    endpoint 
     * @return EinsteinVisionDatasetResult
     **/
-    public static EinsteinVisionDatasetResult getDataSetStatus(String datasetId){
+    public static EinsteinVisionDatasetResult getDataSetStatus(String datasetId,Boolean commitToken){
         EinsteinVisionDatasetResult dataset = new EinsteinVisionDatasetResult();
         String endpoint = 'https://api.metamind.io/v1/vision/datasets/';
         //Invoke AccessTokenManager To Get accessToken
@@ -13,7 +13,7 @@ public with sharing class EinsteinVisionGetDataset{
          if(result.getStatusCode() == 200){
            dataset = EinstieinVisionCreateDatasetUtil.parseResponse(result.getBody());
            //Check if token needs commit and if yes commit it 
-           if(accessTokenObject.isChanged){
+           if(accessTokenObject.isChanged && commitToken){
                EinsteinVisionAccessTokenManager.updateAccessToken(accessTokenObject.accessToken);
            }
         }else{
@@ -23,7 +23,9 @@ public with sharing class EinsteinVisionGetDataset{
               EinsteinVisionAccessTokenManager.getNewToken(EinsteinVision__c.getOrgDefaults()).accessToken);
               dataset = EinstieinVisionCreateDatasetUtil.parseResponse(retryresult.getBody());
                //Commit the new token
-               EinsteinVisionAccessTokenManager.updateAccessToken(accessTokenObject.accessToken);
+               if(commitToken){
+                EinsteinVisionAccessTokenManager.updateAccessToken(accessTokenObject.accessToken);
+               }
             }else{
               throw new EinstieinVisionCreateDatasetUtil.EinstieinVisionException(result.getBody());
            }

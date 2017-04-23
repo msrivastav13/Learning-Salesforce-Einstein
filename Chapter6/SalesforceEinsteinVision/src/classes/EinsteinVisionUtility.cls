@@ -181,4 +181,16 @@ public class EinsteinVisionUtility{
         return 'multipart/form-data; charset="UTF-8"; boundary="' + Boundary + '"';
     }
 
+    /**
+     *  Log all the error in the Error_log__c object
+     */
+
+     public static Error_Log__c logError(String jobtype,String errormessage,Id datasetId){
+         Error_Log__c error = new Error_Log__c();
+         error.Job_Type__c = jobtype;
+         error.Error_Message__c = errormessage;
+         error.Einstein_Vision_Dataset__c = datasetId;
+         return error;
+    }
+
 }

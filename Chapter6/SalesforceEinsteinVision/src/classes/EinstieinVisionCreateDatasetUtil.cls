@@ -7,7 +7,7 @@ public with sharing class EinstieinVisionCreateDatasetUtil{
     * @return  EinsteinVisionDatasetResult that comprises of datasetId and status as upload
     **/
 
-    public static EinsteinVisionDatasetResult createDatasetFromURLAsync(String publicURL){
+    public static EinsteinVisionDatasetResult createDatasetFromURLAsync(String publicURL,Boolean commitToken){
         EinsteinVisionDatasetResult dataset = new EinsteinVisionDatasetResult();
         String body = '';
         body += EinsteinVisionUtility.WriteBoundary();
@@ -20,7 +20,7 @@ public with sharing class EinstieinVisionCreateDatasetUtil{
         if(result.getStatusCode() == 200){
            dataset = parseResponse(result.getBody());
            //Check if token needs commit and if yes commit it 
-           if(accessTokenObject.isChanged){
+           if(accessTokenObject.isChanged && commitToken){
                EinsteinVisionAccessTokenManager.updateAccessToken(accessTokenObject.accessToken);
            }
         }else{
@@ -32,7 +32,9 @@ public with sharing class EinstieinVisionCreateDatasetUtil{
                                                                                 );
               dataset = parseResponse(retryresult.getBody());
                //Commit the new token
-               EinsteinVisionAccessTokenManager.updateAccessToken(EinsteinVisionAccessTokenManager.getNewToken(EinsteinVision__c.getOrgDefaults()).accessToken);
+               if(commitToken){
+                 EinsteinVisionAccessTokenManager.updateAccessToken(EinsteinVisionAccessTokenManager.getNewToken(EinsteinVision__c.getOrgDefaults()).accessToken);
+               }
             }else{
               throw new EinstieinVisionException(result.getBody());
            }

@@ -4,7 +4,7 @@ public class EinsteinVisionTrainDataSetResponse{
     public Integer datasetVersionId;    //0
     public String name_x; //Beach and Mountain Model
     public String status;   //SUCCEEDED
-    public Integer progress;    //1
+    public Double progress;    //1
     public String createdAt;    //2016-09-16T18:03:21.000+0000
     public String updatedAt;    //2016-09-16T18:03:21.000+0000
     public Double learningRate; //0.001
