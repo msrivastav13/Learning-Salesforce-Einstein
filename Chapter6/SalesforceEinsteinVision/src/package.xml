@@ -3,6 +3,7 @@
     <fullName>Einstein Vision</fullName>
     <description>This package consists of code for connecting Salesforce with the Einstein Vision</description>
     <types>
+        <members>EinsetinPredictionResponse</members>
         <members>EinsteinVisionAccessTokenManager</members>
         <members>EinsteinVisionCreateDatasetScheduler</members>
         <members>EinsteinVisionDataSetList</members>
@@ -11,6 +12,7 @@
         <members>EinsteinVisionGetStatusScheduler</members>
         <members>EinsteinVisionGetTrainingStatusScheduler</members>
         <members>EinsteinVisionHttpUtility</members>
+        <members>EinsteinVisionImagePrediction</members>
         <members>EinsteinVisionJWT</members>
         <members>EinsteinVisionJWTBearerTokenExchange</members>
         <members>EinsteinVisionTrainDataSetResponse</members>
